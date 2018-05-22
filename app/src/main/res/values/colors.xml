@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F69454</color> <!-- tangerine -->
+    <color name="colorPrimaryDark">#EE693F</color> <!-- carrot -->
+    <color name="colorAccent">#fcfdfe</color> <!-- off white -->
+    <color name="colorGreen">#739f3d</color> <!-- pear green -->
+</resources>
