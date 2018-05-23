@@ -40,30 +40,6 @@
             tools:layout_editor_absoluteY="201dp" />
     </com.github.florent37.materialtextfield.MaterialTextField>
 
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:id="@+id/mat_et_password"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mat_et_student_number"
-        app:mtf_labelColor="#666"
-        app:mtf_image="@drawable/ic_password">
-
-        <EditText
-            android:id="@+id/et_password"
-            android:layout_width="268dp"
-            android:layout_height="wrap_content"
-            android:hint="Password"
-            android:textColor="#333"
-            android:textSize="15sp"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="201dp"
-            android:password="true"
-            android:textCursorDrawable="@color/colorPrimary"/>
-    </com.github.florent37.materialtextfield.MaterialTextField>
-
     <com.balysv.materialripple.MaterialRippleLayout
         android:id="@+id/btn_sign_in_ripple"
         android:layout_width="144dp"
@@ -75,7 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mat_et_password"
+        app:layout_constraintTop_toBottomOf="@+id/mat_et_student_number"
         app:mrl_rippleAlpha="0.5"
         app:mrl_rippleColor="@color/colorGreen"
         app:mrl_rippleOverlay="true">
