@@ -10,9 +10,15 @@ import retrofit2.http.POST;
 public interface ServiceAPI {
 
     String postLogin = "/api/v1/login";
+    String postAttendance = "/api/v1/attendances";
 
     @FormUrlEncoded
     @POST(postLogin)
     Call<LoginResult> postJSONLogin (@Field("studentnum") String studentNum);
+
+    @FormUrlEncoded
+    @POST(postAttendances)
+    Call<AttendanceResult> postJSONAttendance (@Field("date") String date,
+                                              @Field("attendance") String attendance);
 
 }

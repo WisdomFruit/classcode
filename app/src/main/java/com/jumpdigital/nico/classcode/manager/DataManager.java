@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.jumpdigital.nico.classcode.model.LoginResult;
 import com.jumpdigital.nico.classcode.retrofit.Factory;
+import com.jumpdigital.nico.classcode.retrofit.Interface;
 import com.jumpdigital.nico.classcode.retrofit.ServiceAPI;
 import com.jumpdigital.nico.classcode.retrofit.Interface.postLoginCallback;
 import java.util.HashMap;
@@ -35,8 +36,6 @@ public class DataManager {
         return mInstance;
     }
 
-
-
     public void postLogin(HashMap<String, String> map, final postLoginCallback callback) {
         String sNum = map.get("studentnum");
 
@@ -59,6 +58,33 @@ public class DataManager {
 
             @Override
             public void onFailure(Call<LoginResult> call, Throwable t) {
+                callback.onResponse(false, null, t.getLocalizedMessage());
+            }
+        });
+    }
+
+    public void postAttendance(HashMap<String, String> map, final Interface.postAttendanceCallback callback) {
+        String date = map.get("date");
+        String attendance = map.get("attendance");
+        final Call<AttendanceResult> ccSignUp = serviceAPI.postJSONAttendance(date, attendance);
+        ccSignUp.enqueue(new Callback<AttendanceResult>() {
+            @Override
+            public void onResponse(Call<AttendanceResult> call, Response<AttendanceResult> response) {
+                AttendanceResult ccsur = response.body();
+                if (response.isSuccessful() && (ccsur).getStatus().equals("Sucess")) {
+                    callback.onResponse(true, response.body(), "Successful");
+                }
+                else {
+                    try {
+                        callback.onResponse(false, null, "Failed");
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<AttendanceResult> call, Throwable t) {
                 callback.onResponse(false, null, t.getLocalizedMessage());
             }
         });

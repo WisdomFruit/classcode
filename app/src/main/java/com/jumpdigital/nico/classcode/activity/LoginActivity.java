@@ -50,9 +50,8 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(boolean isSuccess, LoginResult response, String message) {
                 if (isSuccess) {
                     helper.setLogin(true);
-                    helper.setStundentName((response
-                            .getData()
-                            .getFirstname() + " "
+                    helper.setStudentName((
+                            response.getData().getFirstname() + " "
                             + response.getData().getMiddlename() + " "
                             + response.getData().getLastname()).toString());
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
