@@ -8,9 +8,9 @@ public class LoginResult {
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("data")
+    @SerializedName("loginData")
     @Expose
-    private Data data;
+    private LoginData loginData;
 
     public String getStatus() {
         return status;
@@ -20,12 +20,12 @@ public class LoginResult {
         this.status = status;
     }
 
-    public Data getData() {
-        return data;
+    public LoginData getLoginData() {
+        return loginData;
     }
 
-    public void setData(Data data) {
-        this.data = data;
+    public void setLoginData(LoginData loginData) {
+        this.loginData = loginData;
     }
 
 }

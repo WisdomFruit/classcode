@@ -1,6 +1,7 @@
 package com.jumpdigital.nico.classcode.retrofit;
 
 
+import com.jumpdigital.nico.classcode.model.AttendanceResult;
 import com.jumpdigital.nico.classcode.model.LoginResult;
 
 public class Interface {
@@ -16,3 +17,4 @@ public class Interface {
                         String message);
     }
 }
+

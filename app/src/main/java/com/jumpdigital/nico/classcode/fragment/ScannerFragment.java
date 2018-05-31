@@ -2,7 +2,6 @@ package com.jumpdigital.nico.classcode.fragment;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,11 +19,10 @@ import com.budiyev.android.codescanner.CodeScannerView;
 import com.budiyev.android.codescanner.DecodeCallback;
 import com.google.zxing.Result;
 import com.jumpdigital.nico.classcode.R;
-import com.jumpdigital.nico.classcode.activity.HomeActivity;
 import com.jumpdigital.nico.classcode.activity.LoginActivity;
 import com.jumpdigital.nico.classcode.helper.Helper;
 import com.jumpdigital.nico.classcode.manager.DataManager;
-import com.jumpdigital.nico.classcode.model.LoginResult;
+import com.jumpdigital.nico.classcode.model.AttendanceResult;
 import com.jumpdigital.nico.classcode.retrofit.Interface;
 
 import java.text.SimpleDateFormat;
@@ -42,6 +40,8 @@ public class ScannerFragment extends Fragment {
     SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
     String formattedDate = df.format(c);
 
+    String qr_code = "Lucky";
+
     private String attendance;
     Helper helper;
     private CodeScanner mCodeScanner;
@@ -56,18 +56,17 @@ public class ScannerFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_scanner, container, false);
         CodeScannerView scannerView = root.findViewById(R.id.scanner_view);
         mCodeScanner = new CodeScanner(activity, scannerView);
-        if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_DENIED) {
-            ActivityCompat.requestPermissions(activity, new String[] {Manifest.permission.CAMERA}, 0);
-        }
         mCodeScanner.setDecodeCallback(new DecodeCallback() {
             @Override
             public void onDecoded(@NonNull final Result result) {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        loadAttendance();
-                        //Toast.makeText(activity, result.getText(), Toast.LENGTH_SHORT).show();
+                        String res = result.toString();
+//                        Toast.makeText(activity, res, Toast.LENGTH_SHORT).show();
+                        if (res.equals("BAT")){
+                            loadAttendance();
+                        }
                     }
                 });
             }
@@ -94,14 +93,16 @@ public class ScannerFragment extends Fragment {
     }
 
     public void loadAttendance() {
+        LoginActivity la = new LoginActivity();
         HashMap<String, String> map = new HashMap<>();
+        map.put("studentnum",la.SN);
         map.put("date", formattedDate.toString());
         map.put("attendance", String.valueOf(isPresent));
         DataManager.getmInstance(getActivity()).postAttendance(map, new Interface.postAttendanceCallback() {
             @Override
-            public void onResponse(boolean isSuccess, LoginResult response, String message) {
+            public void onResponse(boolean isSuccess, AttendanceResult response, String message) {
                 if (isSuccess) {
-                    helper.setLogin(true);
+                    //helper.setAttendance(true);
                     Toast.makeText(getActivity(), "Attendance Checked", Toast.LENGTH_LONG).show();
                 }
                 else {

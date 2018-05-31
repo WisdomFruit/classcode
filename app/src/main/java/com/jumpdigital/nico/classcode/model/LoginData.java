@@ -3,7 +3,7 @@ package com.jumpdigital.nico.classcode.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Data {
+public class LoginData {
 
     @SerializedName("id")
     @Expose

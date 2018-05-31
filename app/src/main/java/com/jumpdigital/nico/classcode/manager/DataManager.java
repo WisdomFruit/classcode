@@ -2,6 +2,7 @@ package com.jumpdigital.nico.classcode.manager;
 
 import android.content.Context;
 
+import com.jumpdigital.nico.classcode.model.AttendanceResult;
 import com.jumpdigital.nico.classcode.model.LoginResult;
 import com.jumpdigital.nico.classcode.retrofit.Factory;
 import com.jumpdigital.nico.classcode.retrofit.Interface;
@@ -64,14 +65,16 @@ public class DataManager {
     }
 
     public void postAttendance(HashMap<String, String> map, final Interface.postAttendanceCallback callback) {
+        String studentNumber = map.get("studentnum");
         String date = map.get("date");
         String attendance = map.get("attendance");
-        final Call<AttendanceResult> ccSignUp = serviceAPI.postJSONAttendance(date, attendance);
+
+        final Call<AttendanceResult> ccSignUp = serviceAPI.postJSONAttendance(studentNumber,date , attendance);
         ccSignUp.enqueue(new Callback<AttendanceResult>() {
             @Override
             public void onResponse(Call<AttendanceResult> call, Response<AttendanceResult> response) {
-                AttendanceResult ccsur = response.body();
-                if (response.isSuccessful() && (ccsur).getStatus().equals("Sucess")) {
+                AttendanceResult ccAR = response.body();
+                if (response.isSuccessful() && (ccAR).getStatus().equals("SUCCESS")) {
                     callback.onResponse(true, response.body(), "Successful");
                 }
                 else {

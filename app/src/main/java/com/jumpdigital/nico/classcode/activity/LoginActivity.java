@@ -19,7 +19,7 @@ import java.util.HashMap;
 public class LoginActivity extends AppCompatActivity {
 
     EditText etStudentNumber;
-
+    public String SN;
     Helper helper;
 
     @Override
@@ -50,10 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onResponse(boolean isSuccess, LoginResult response, String message) {
                 if (isSuccess) {
                     helper.setLogin(true);
-                    helper.setStudentName((
-                            response.getData().getFirstname() + " "
-                            + response.getData().getMiddlename() + " "
-                            + response.getData().getLastname()).toString());
+                    SN = helper.getStudentNumber((response.getLoginData().getStudentnum()));
                     startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                     finish();
                 }

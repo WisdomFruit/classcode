@@ -17,7 +17,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Factory {
-    public static String BASE_URL = "http://192.168.0.92:3000";
+    public static String BASE_URL = "http://172.20.10.2:3000";
     private ServiceAPI service;
     public boolean hasAuthorization = false;
     private Context _context;

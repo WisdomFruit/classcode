@@ -13,10 +13,12 @@ public class Helper {
     int PRIVATE_MODE = 0;
 
     private static final String PREF_NAME = "ClassCode";
-    private static final String KEY_IS_PRESENT = "Attedance"
+    private static final String KEY_IS_PRESENT = "Attedance";
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
     private static final String StudentName = "Full Name";
+    private static final String StudentNumber = "StudentNumber";
+
 
     public Helper (Context context){
         this._context = context;
@@ -48,6 +50,15 @@ public class Helper {
 
     public void setStudentName(String uname){
         editor.putString(StudentName, uname);
+        editor.commit();
+    }
+
+    public String getStudentNumber(String studentnum){
+        return preferences.getString(StudentNumber, "studentnum");
+    }
+
+    public void setStudentNumber(String studnum){
+        editor.putString(StudentNumber, studnum);
         editor.commit();
     }
 }
